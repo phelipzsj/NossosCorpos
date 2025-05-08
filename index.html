@@ -2,10 +2,12 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Nossos Corpos | Para a Gabriellen</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap');
         
@@ -13,10 +15,13 @@
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-text-size-adjust: 100%;
         }
         
         .heart-beat {
             animation: heartbeat 1.5s ease-in-out infinite;
+            -webkit-animation: heartbeat 1.5s ease-in-out infinite;
         }
         
         @keyframes heartbeat {
@@ -29,6 +34,7 @@
         
         .disc-spin {
             animation: spin 20s linear infinite;
+            -webkit-animation: spin 20s linear infinite;
         }
         
         @keyframes spin {
@@ -42,10 +48,12 @@
         
         .countdown-box {
             transition: all 0.3s ease;
+            -webkit-transition: all 0.3s ease;
         }
         
         .countdown-box:hover {
             transform: translateY(-5px);
+            -webkit-transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         
@@ -59,6 +67,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        @media (max-width: 640px) {
+            .vinyl-disc {
+                width: 150px;
+                height: 150px;
+            }
         }
         
         .vinyl-center {
@@ -87,6 +103,14 @@
             z-index: 1;
         }
         
+        @media (max-width: 640px) {
+            .vinyl-label {
+                width: 60px;
+                height: 60px;
+                font-size: 10px;
+            }
+        }
+        
         .vinyl-groove {
             position: absolute;
             width: 180px;
@@ -95,9 +119,23 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
         
+        @media (max-width: 640px) {
+            .vinyl-groove {
+                width: 130px;
+                height: 130px;
+            }
+        }
+        
         .vinyl-groove:nth-child(2) {
             width: 160px;
             height: 160px;
+        }
+        
+        @media (max-width: 640px) {
+            .vinyl-groove:nth-child(2) {
+                width: 110px;
+                height: 110px;
+            }
         }
         
         .vinyl-groove:nth-child(3) {
@@ -105,16 +143,45 @@
             height: 140px;
         }
         
+        @media (max-width: 640px) {
+            .vinyl-groove:nth-child(3) {
+                width: 90px;
+                height: 90px;
+            }
+        }
+        
         .vinyl-groove:nth-child(4) {
             width: 120px;
             height: 120px;
+        }
+        
+        @media (max-width: 640px) {
+            .vinyl-groove:nth-child(4) {
+                width: 70px;
+                height: 70px;
+            }
+        }
+        
+        /* iOS specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                /* Prevent elastic scrolling on iOS */
+                overscroll-behavior-y: none;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .vinyl-disc {
+                /* Improve animation performance on iOS */
+                will-change: transform;
+                -webkit-transform: translateZ(0);
+            }
         }
     </style>
 </head>
 <body class="text-gray-800">
     <div class="min-h-screen flex flex-col">
         <!-- Header -->
-        <header class="py-6 px-4 sm:px-6 lg:px-8 bg-white bg-opacity-80 shadow-sm">
+        <header class="py-6 px-4 sm:px-6 lg:px-8 bg-white bg-opacity-80 shadow-sm sticky top-0 z-50">
             <div class="max-w-7xl mx-auto flex justify-between items-center">
                 <div class="flex items-center">
                     <i class="fas fa-music text-pink-500 text-2xl mr-2"></i>
@@ -125,9 +192,16 @@
                     <a href="#countdown" class="text-gray-600 hover:text-pink-500 transition">Contagem</a>
                     <a href="#message" class="text-gray-600 hover:text-pink-500 transition">Mensagem</a>
                 </nav>
-                <button class="md:hidden text-gray-600">
+                <button class="md:hidden text-gray-600" id="mobileMenuButton">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden bg-white absolute top-full left-0 right-0 shadow-lg py-4 px-6">
+                <a href="#about" class="block py-2 text-gray-600 hover:text-pink-500 transition">Sobre</a>
+                <a href="#countdown" class="block py-2 text-gray-600 hover:text-pink-500 transition">Contagem</a>
+                <a href="#message" class="block py-2 text-gray-600 hover:text-pink-500 transition">Mensagem</a>
             </div>
         </header>
 
@@ -149,12 +223,12 @@
                 </div>
                 
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-gray-800">
-                    <span class="text-pink-500 glow">Nossos Corpos.</span> <br> 
+                    <span class="text-pink-500 glow">Nossos Corpos</span> <br> 
                     <span class="text-3xl sm:text-4xl">Seu Disco Está Chegando!</span>
                 </h1>
                 
                 <p class="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                    Uma surpresa musical feita com todo o meu amor está a caminho. A contagem regressiva começou!
+                    Uma surpresa feita com todo o meu amor está a caminho. A contagem regressiva começa agora!
                 </p>
                 
                 <div id="countdown" class="grid grid-cols-4 gap-4 max-w-md mx-auto mb-12">
@@ -184,7 +258,7 @@
                     <div>
                         <h3 class="text-2xl font-bold mb-4 text-pink-500">Um Projeto Feito Com Amor</h3>
                         <p class="text-gray-600 mb-4">
-                            "Nossos Corpos" é um disco cuidadosamente preparado para celebrar tudo o que você é. Cada música foi selecionada com carinho e cada nota foi pensada para tocar seu coração.
+                            "Nossos Corpos" é um disco cuidadosamente preparado para celebrar tudo o que você é. Cada música foi selecionada com carinho e cada letra foi pensada para tocar seu coração, alma e tudo.
                         </p>
                         <p class="text-gray-600 mb-6">
                             É mais do que um presente musical, é uma declaração de amor em forma de arte. Espero que você sinta toda a emoção e dedicação que coloquei em cada detalhe.
@@ -200,7 +274,7 @@
                 <div class="bg-white rounded-xl shadow-lg p-8 md:p-12 transform -rotate-1 hover:rotate-0 transition">
                     <div class="text-pink-500 text-5xl mb-4">"</div>
                     <p class="text-xl italic text-gray-700 mb-6">
-                        À pessoa que ilumina meus dias e inspira minha vida com sua luz. "Nossos Corpos" é uma pequena parte do que sinto por você, uma melodia que espero ecoe em seu coração como seu amor ecoa no meu.
+                        À pessoa que ilumina meus dias e inspira minha vida com sua luz. "Nossos Corpos" é uma pequena parte do que sinto por você, algumas músicas que espero ecoar em seu coração como seu amor ecoa no meu.
                     </p>
                     <p class="mt-4 font-medium text-pink-500">Com todo o meu amor</p>
                 </div>
@@ -231,7 +305,7 @@
                     </div>
                 </div>
                 <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                    <p>© 2025 Nossos Corpos. Todos os direitos reservados.</p>
+                    <p>© 2025 Nossos Corpos. Todos os direitos reservados ao amor da minha vida.</p>
                     <p class="mt-2 text-sm">Desenvolvido com <i class="fas fa-heart text-pink-400"></i> para você</p>
                 </div>
             </div>
@@ -239,6 +313,10 @@
     </div>
 
     <script>
+        // iOS detection
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        
         // Set the date we're counting down to (Friday 18:00)
         function getNextFriday18() {
             const now = new Date();
@@ -315,16 +393,58 @@
             }
         }, 1000);
         
-        // Smooth scrolling for anchor links
+        // Smooth scrolling for anchor links with iOS support
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (mobileMenu.classList.contains('hidden') === false) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    if (isIOS) {
+                        // iOS smooth scroll alternative
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        // Standard smooth scroll for other devices
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
             });
         });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+        
+        // iOS specific optimizations
+        if (isIOS) {
+            // Add iOS specific classes or modifications
+            document.body.classList.add('ios-device');
+            
+            // Force repaint for better animation performance
+            const vinylDiscs = document.querySelectorAll('.vinyl-disc');
+            vinylDiscs.forEach(disc => {
+                disc.style.transform = 'translateZ(0)';
+            });
+        }
     </script>
 </body>
 </html>
