@@ -46,17 +46,6 @@
             text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
         }
         
-        .countdown-box {
-            transition: all 0.3s ease;
-            -webkit-transition: all 0.3s ease;
-        }
-        
-        .countdown-box:hover {
-            transform: translateY(-5px);
-            -webkit-transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
         .vinyl-disc {
             position: relative;
             width: 200px;
@@ -176,6 +165,44 @@
                 -webkit-transform: translateZ(0);
             }
         }
+
+        .track-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .track-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            color: #4a5568;
+        }
+
+        .track-item:before {
+            content: "♫";
+            position: absolute;
+            left: 0;
+            color: #ec4899;
+            font-size: 1.2rem;
+        }
+
+        .arrived-banner {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 9999px;
+            display: inline-block;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -188,8 +215,7 @@
                     <span class="text-xl font-bold text-pink-600">Nossos Corpos</span>
                 </div>
                 <nav class="hidden md:flex space-x-8">
-                    <a href="#about" class="text-gray-600 hover:text-pink-500 transition">Sobre</a>
-                    <a href="#countdown" class="text-gray-600 hover:text-pink-500 transition">Contagem</a>
+                    <a href="#about" class="text-gray-600 hover:text-pink-500 transition">Nossos Corpos</a>
                     <a href="#message" class="text-gray-600 hover:text-pink-500 transition">Mensagem</a>
                 </nav>
                 <button class="md:hidden text-gray-600" id="mobileMenuButton">
@@ -199,8 +225,7 @@
             
             <!-- Mobile Menu -->
             <div id="mobileMenu" class="hidden md:hidden bg-white absolute top-full left-0 right-0 shadow-lg py-4 px-6">
-                <a href="#about" class="block py-2 text-gray-600 hover:text-pink-500 transition">Sobre</a>
-                <a href="#countdown" class="block py-2 text-gray-600 hover:text-pink-500 transition">Contagem</a>
+                <a href="#about" class="block py-2 text-gray-600 hover:text-pink-500 transition">Nossos Corpos</a>
                 <a href="#message" class="block py-2 text-gray-600 hover:text-pink-500 transition">Mensagem</a>
             </div>
         </header>
@@ -224,16 +249,16 @@
                 
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-gray-800">
                     <span class="text-pink-500 glow">Nossos Corpos</span> <br> 
-                    <span class="text-3xl sm:text-4xl">Seu Disco Está Chegando!</span>
+                    <span class="text-3xl sm:text-4xl">Seu Disco Chegou!!!</span>
                 </h1>
+
+                <div class="arrived-banner">
+                    <i class="fas fa-gift mr-2"></i> Seu presente especial está aqui!
+                </div>
                 
                 <p class="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                    Uma surpresa feita com todo o meu amor está a caminho. A contagem regressiva começa agora!
+                    Um disco feito com todo o meu amor para você. Espero que cada música toque seu coração.
                 </p>
-                
-                <div id="countdown" class="grid grid-cols-4 gap-4 max-w-md mx-auto mb-12">
-                    <!-- Countdown will be inserted here by JavaScript -->
-                </div>
             </div>
         </main>
 
@@ -241,7 +266,7 @@
         <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 bg-white bg-opacity-90">
             <div class="max-w-4xl mx-auto">
                 <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
-                    <span class="border-b-4 border-pink-500 pb-2">Sobre Este Presente</span>
+                    <span class="border-b-4 border-pink-500 pb-2">Nossos Corpos</span>
                 </h2>
                 
                 <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -256,12 +281,18 @@
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold mb-4 text-pink-500">Um Projeto Feito Com Amor</h3>
-                        <p class="text-gray-600 mb-4">
-                            "Nossos Corpos" é um disco cuidadosamente preparado para celebrar tudo o que você é. Cada música foi selecionada com carinho e cada letra foi pensada para tocar seu coração, alma e tudo.
-                        </p>
-                        <p class="text-gray-600 mb-6">
-                            É mais do que um presente musical, é uma declaração de amor em forma de arte. Espero que você sinta toda a emoção e dedicação que coloquei em cada detalhe.
+                        <h3 class="text-2xl font-bold mb-4 text-pink-500">Faixas do Álbum</h3>
+                        <ul class="track-list">
+                            <li class="track-item">1. piloto</li>
+                            <li class="track-item">2. hotel</li>
+                            <li class="track-item">3. é mó viagem</li>
+                            <li class="track-item">4. sem estresse</li>
+                            <li class="track-item">5. próximo passo</li>
+                            <li class="track-item">6. seus olhos</li>
+                            <li class="track-item">7. nossos corpos</li>
+                        </ul>
+                        <p class="text-gray-600 mt-6">
+                            Cada música foi cuidadosamente selecionada para representar momentos especiais entre nós. Espero que você sinta toda a emoção e dedicação que coloquei em cada detalhe.
                         </p>
                     </div>
                 </div>
@@ -316,82 +347,6 @@
         // iOS detection
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
                      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-        
-        // Set the date we're counting down to (Friday 18:00)
-        function getNextFriday18() {
-            const now = new Date();
-            const day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 5 = Friday
-            const hour = now.getHours();
-            
-            // Calculate days until Friday
-            let daysUntilFriday = 5 - day;
-            if (day === 5 && hour >= 18) {
-                daysUntilFriday += 7; // If it's already past Friday 18:00, go to next Friday
-            } else if (day > 5) {
-                daysUntilFriday += 7; // If it's Saturday, add 7 days
-            }
-            
-            // Create target date (next Friday at 18:00)
-            const targetDate = new Date();
-            targetDate.setDate(now.getDate() + daysUntilFriday);
-            targetDate.setHours(18, 0, 0, 0);
-            
-            return targetDate;
-        }
-        
-        const countDownDate = getNextFriday18().getTime();
-        
-        // Update the count down every 1 second
-        const x = setInterval(function() {
-            // Get today's date and time
-            const now = new Date().getTime();
-            
-            // Find the distance between now and the count down date
-            const distance = countDownDate - now;
-            
-            // Time calculations for days, hours, minutes and seconds
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            // Display the result
-            const countdownElement = document.getElementById("countdown");
-            
-            if (countdownElement) {
-                countdownElement.innerHTML = `
-                    <div class="countdown-box bg-white rounded-lg p-4 shadow-md">
-                        <div class="text-3xl font-bold text-pink-500">${days}</div>
-                        <div class="text-gray-500 uppercase text-sm">Dias</div>
-                    </div>
-                    <div class="countdown-box bg-white rounded-lg p-4 shadow-md">
-                        <div class="text-3xl font-bold text-pink-500">${hours}</div>
-                        <div class="text-gray-500 uppercase text-sm">Horas</div>
-                    </div>
-                    <div class="countdown-box bg-white rounded-lg p-4 shadow-md">
-                        <div class="text-3xl font-bold text-pink-500">${minutes}</div>
-                        <div class="text-gray-500 uppercase text-sm">Minutos</div>
-                    </div>
-                    <div class="countdown-box bg-white rounded-lg p-4 shadow-md">
-                        <div class="text-3xl font-bold text-pink-500">${seconds}</div>
-                        <div class="text-gray-500 uppercase text-sm">Segundos</div>
-                    </div>
-                `;
-            }
-            
-            // If the count down is finished
-            if (distance < 0) {
-                clearInterval(x);
-                if (countdownElement) {
-                    countdownElement.innerHTML = `
-                        <div class="col-span-4 bg-pink-500 text-white rounded-lg p-6 text-center">
-                            <h3 class="text-2xl font-bold">É HORA DA SURPRESA!</h3>
-                            <p class="mt-2">Seu disco especial está pronto!</p>
-                        </div>
-                    `;
-                }
-            }
-        }, 1000);
         
         // Smooth scrolling for anchor links with iOS support
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
