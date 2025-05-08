@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Corpos | Para a Gabriellen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .heart-beat {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .disc-spin {
+            animation: spin 20s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .glow {
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+        }
+        
+        .countdown-box {
+            transition: all 0.3s ease;
+        }
+        
+        .countdown-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .vinyl-disc {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #111 0%, #333 100%);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .vinyl-center {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #ccc;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .vinyl-label {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #333;
+            font-size: 12px;
+            text-align: center;
+            z-index: 1;
+        }
+        
+        .vinyl-groove {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .vinyl-groove:nth-child(2) {
+            width: 160px;
+            height: 160px;
+        }
+        
+        .vinyl-groove:nth-child(3) {
+            width: 140px;
+            height: 140px;
+        }
+        
+        .vinyl-groove:nth-child(4) {
+            width: 120px;
+            height: 120px;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="py-6 px-4 sm:px-6 lg:px-8 bg-white bg-opacity-80 shadow-sm">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center">
+                    <i class="fas fa-music text-pink-500 text-2xl mr-2"></i>
+                    <span class="text-xl font-bold text-pink-600">Nossos Corpos</span>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-gray-600 hover:text-pink-500 transition">Sobre</a>
+                    <a href="#countdown" class="text-gray-600 hover:text-pink-500 transition">Contagem</a>
+                    <a href="#message" class="text-gray-600 hover:text-pink-500 transition">Mensagem</a>
+                </nav>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <main class="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="relative inline-block mb-8">
+                    <div class="vinyl-disc disc-spin">
+                        <div class="vinyl-groove"></div>
+                        <div class="vinyl-groove"></div>
+                        <div class="vinyl-groove"></div>
+                        <div class="vinyl-groove"></div>
+                        <div class="vinyl-label">Nossos<br>Corpos</div>
+                        <div class="vinyl-center"></div>
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 bg-pink-500 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg heart-beat">
+                        <i class="fas fa-heart text-2xl"></i>
+                    </div>
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-gray-800">
+                    <span class="text-pink-500 glow">Nossos Corpos.</span> <br> 
+                    <span class="text-3xl sm:text-4xl">Seu Disco Está Chegando!</span>
+                </h1>
+                
+                <p class="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Uma surpresa musical feita com todo o meu amor está a caminho. A contagem regressiva começou!
+                </p>
+                
+                <div id="countdown" class="grid grid-cols-4 gap-4 max-w-md mx-auto mb-12">
+                    <!-- Countdown will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </main>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 bg-white bg-opacity-90">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
+                    <span class="border-b-4 border-pink-500 pb-2">Sobre Este Presente</span>
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="flex justify-center">
+                        <div class="vinyl-disc disc-spin">
+                            <div class="vinyl-groove"></div>
+                            <div class="vinyl-groove"></div>
+                            <div class="vinyl-groove"></div>
+                            <div class="vinyl-groove"></div>
+                            <div class="vinyl-label">Nossos<br>Corpos</div>
+                            <div class="vinyl-center"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-pink-500">Um Projeto Feito Com Amor</h3>
+                        <p class="text-gray-600 mb-4">
+                            "Nossos Corpos" é um disco cuidadosamente preparado para celebrar tudo o que você é. Cada música foi selecionada com carinho e cada nota foi pensada para tocar seu coração.
+                        </p>
+                        <p class="text-gray-600 mb-6">
+                            É mais do que um presente musical, é uma declaração de amor em forma de arte. Espero que você sinta toda a emoção e dedicação que coloquei em cada detalhe.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Message Section -->
+        <section id="message" class="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-pink-50 to-purple-50">
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="bg-white rounded-xl shadow-lg p-8 md:p-12 transform -rotate-1 hover:rotate-0 transition">
+                    <div class="text-pink-500 text-5xl mb-4">"</div>
+                    <p class="text-xl italic text-gray-700 mb-6">
+                        À pessoa que ilumina meus dias e inspira minha vida com sua luz. "Nossos Corpos" é uma pequena parte do que sinto por você, uma melodia que espero ecoe em seu coração como seu amor ecoa no meu.
+                    </p>
+                    <p class="mt-4 font-medium text-pink-500">Com todo o meu amor</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-8 px-4 sm:px-6 lg:px-8 bg-gray-800 text-white">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <div class="flex items-center">
+                            <i class="fas fa-music text-pink-400 text-xl mr-2"></i>
+                            <span class="text-xl font-bold">Nossos Corpos</span>
+                        </div>
+                        <p class="text-gray-400 mt-2">Para a Gabriellen - Um presente feito com amor e dedicação</p>
+                    </div>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-pink-400 transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-400 transition">
+                            <i class="fab fa-spotify text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-400 transition">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                    <p>© 2025 Nossos Corpos. Todos os direitos reservados.</p>
+                    <p class="mt-2 text-sm">Desenvolvido com <i class="fas fa-heart text-pink-400"></i> para você</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Set the date we're counting down to (Friday 18:00)
+        function getNextFriday18() {
+            const now = new Date();
+            const day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 5 = Friday
+            const hour = now.getHours();
+            
+            // Calculate days until Friday
+            let daysUntilFriday = 5 - day;
+            if (day === 5 && hour >= 18) {
+                daysUntilFriday += 7; // If it's already past Friday 18:00, go to next Friday
+            } else if (day > 5) {
+                daysUntilFriday += 7; // If it's Saturday, add 7 days
+            }
+            
+            // Create target date (next Friday at 18:00)
+            const targetDate = new Date();
+            targetDate.setDate(now.getDate() + daysUntilFriday);
+            targetDate.setHours(18, 0, 0, 0);
+            
+            return targetDate;
+        }
+        
+        const countDownDate = getNextFriday18().getTime();
+        
+        // Update the count down every 1 second
+        const x = setInterval(function() {
+            // Get today's date and time
+            const now = new Date().getTime();
+            
+            // Find the distance between now and the count down date
+            const distance = countDownDate - now;
+            
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Display the result
+            const countdownElement = document.getElementById("countdown");
+            
+            if (countdownElement) {
+                countdownElement.innerHTML = `
+                    <div class="countdown-box bg-white rounded-lg p-4 shadow-md">
+                        <div class="text-3xl font-bold text-pink-500">${days}</div>
+                        <div class="text-gray-500 uppercase text-sm">Dias</div>
+                    </div>
+                    <div class="countdown-box bg-white rounded-lg p-4 shadow-md">
+                        <div class="text-3xl font-bold text-pink-500">${hours}</div>
+                        <div class="text-gray-500 uppercase text-sm">Horas</div>
+                    </div>
+                    <div class="countdown-box bg-white rounded-lg p-4 shadow-md">
+                        <div class="text-3xl font-bold text-pink-500">${minutes}</div>
+                        <div class="text-gray-500 uppercase text-sm">Minutos</div>
+                    </div>
+                    <div class="countdown-box bg-white rounded-lg p-4 shadow-md">
+                        <div class="text-3xl font-bold text-pink-500">${seconds}</div>
+                        <div class="text-gray-500 uppercase text-sm">Segundos</div>
+                    </div>
+                `;
+            }
+            
+            // If the count down is finished
+            if (distance < 0) {
+                clearInterval(x);
+                if (countdownElement) {
+                    countdownElement.innerHTML = `
+                        <div class="col-span-4 bg-pink-500 text-white rounded-lg p-6 text-center">
+                            <h3 class="text-2xl font-bold">É HORA DA SURPRESA!</h3>
+                            <p class="mt-2">Seu disco especial está pronto!</p>
+                        </div>
+                    `;
+                }
+            }
+        }, 1000);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
